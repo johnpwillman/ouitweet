@@ -10,8 +10,8 @@
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 16px Helvetica, Arial; }
       form { position: fixed; bottom: 0; width: 100%; }
-      form input { width: 84%!important; }
-      form button { width: 15%!important; }
+      .input-group { width: 100%; }
+      button { width: 100%; }
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
@@ -29,8 +29,16 @@
       </ul>
     </div>
     <form class="form-inline" action="">
-      <input id="m" class="form-control" autocomplete="off" />
-      <button class="btn btn-default">Send</button>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="input-group input-group-lg">
+            <input id="m" type="text" class="form-control" autocomplete="off" />
+            <div class="input-group-btn">
+              <button class="btn btn-primary">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </form>
 
 
