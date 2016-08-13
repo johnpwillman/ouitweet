@@ -2,6 +2,10 @@ var Twitter = require('twitter');
 
 var express = require('express');
 var app = express();
+var server = require('http').createServer(app);
+
+//socket.io
+var io = require('socket.io')(server);
 
 // Set the port
 app.set('port', (process.env.PORT || 5000));
@@ -52,7 +56,27 @@ app.get('/timeline/:user', function(request, response) {
   //response.send(request.params.user);
 });
 
+app.get('/socketiochat', function(req, res) {
+  res.render('pages/socketiochat');
+  //res.sendFile(__dirname + '/views/pages/index.html');
+});
+
+
+//Socket IO
+io.on('connection', function(socket){
+  console.log('a user connected');
+
+  socket.on('chat message', function(msg){
+    //console.log('message: ' + msg);
+    io.emit('chat message', msg);
+  });
+
+  socket.on('disconnect', function() {
+    console.log('a user disconnected');
+  });
+});
+
 // Run the application
-app.listen(app.get('port'), function() {
+server.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
